@@ -3,7 +3,7 @@ import StepperQuiz from '@/components/quiz'
 import axios from 'axios'
 const fetchQuestions = async () => {
   const fields =
-    'fields[0]=title&fields[1]=description&fields[2]=options&fields[3]=type&fields[4]=correct_answer&fields[5]=step'
+    'sort=step:asc'
   try {
     const url =
       process.env.NEXT_PUBLIC_API_URL_STRAPI + '/api/questions?' + fields
@@ -17,6 +17,7 @@ const fetchQuestions = async () => {
 
 const Quiz = async () => {
   const { data } = await fetchQuestions()
+  console.log('data', data)
   return (
     <ErrorBoundary>
       <StepperQuiz data={data} />
