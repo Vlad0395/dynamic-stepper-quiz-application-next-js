@@ -12,6 +12,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { QuizStep, useQuizStore } from '@/stores/quizStore'
+import { sendGAEvent } from '@next/third-parties/google'
 
 const StepperQuiz = ({ data }: { data: QuizStep[] }) => {
   const { replace, push } = useRouter()
@@ -39,6 +40,12 @@ const StepperQuiz = ({ data }: { data: QuizStep[] }) => {
   const handleNext = () => {
     const correct = currentStep.correct_answer === answers[currentStep.step]
     let nextStep = 0
+    sendGAEvent({
+      action: 'click',
+      category: 'quiz',
+      label: currentStep.step,
+      value: answers[currentStep.step],
+    })
     if (correct && currentStep.step === '1') {
       nextStep = data.findIndex((d) => d.step === currentStep.step) + 1
     } else if (!correct && currentStep.step === '1')
@@ -59,8 +66,6 @@ const StepperQuiz = ({ data }: { data: QuizStep[] }) => {
     }
     return !!answers[currentStep.step]
   }
-
-  console.log('currentStep', currentStep)
 
   return (
     <>
