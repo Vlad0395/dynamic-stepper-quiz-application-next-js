@@ -20,13 +20,15 @@ const Wellcom = () => {
         </CardHeader>
 
         <CardContent className='space-y-6'>
-          <div className='relative mx-auto h-[200px] w-full max-w-[305px] overflow-hidden rounded-lg'>
+          <div className='relative mx-auto h-[200px] w-full overflow-hidden rounded-lg'>
             <Image
               src='/wellcom_page.webp'
               alt='Quiz welcome image'
               fill
               className='object-cover'
               priority
+              placeholder='blur'
+              blurDataURL='/placeholder.svg'
             />
           </div>
 

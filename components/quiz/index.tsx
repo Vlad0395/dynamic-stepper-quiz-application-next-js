@@ -22,7 +22,6 @@ const StepperQuiz = ({ data }: { data: QuizStep[] }) => {
   const searchParams = useSearchParams()
   const step = searchParams.get('step')
 
-  console.log('answers', answers)
   useLayoutEffect(() => {
     setQuestions(data)
     replace(`/quiz?step=${step ? step : data[0]?.step}`)
@@ -66,7 +65,6 @@ const StepperQuiz = ({ data }: { data: QuizStep[] }) => {
     }
     return !!answers[currentStep.step]
   }
-
   return (
     <>
       <CardHeader className='pb-0'>
@@ -87,9 +85,9 @@ const StepperQuiz = ({ data }: { data: QuizStep[] }) => {
           </div>
         </div>
         <Progress value={progress} className='mb-4 h-2' />
-        <div className='relative mb-4 h-48 w-full overflow-hidden rounded-md'>
+        <div className='relative mx-auto mb-4 h-48 w-full overflow-hidden rounded-md'>
           <Image
-            src={currentStep.image || '/placeholder.svg'}
+            src={currentStep.image?.[0]?.url || '/placeholder.svg'}
             alt={currentStep.title}
             fill
             className='object-cover'
@@ -104,7 +102,6 @@ const StepperQuiz = ({ data }: { data: QuizStep[] }) => {
           <RadioGroup
             value={(answers[currentStep.step] as string) || ''}
             onValueChange={(value) => {
-              console.log('value', value)
               setAnswers(currentStep.step, value)
             }}
             className='space-y-3'

@@ -58,7 +58,7 @@ const QuizResults = () => {
         <div className='flex flex-col items-center justify-center py-6'>
           <div className='relative mb-6 h-48 w-full overflow-hidden rounded-md'>
             <Image
-              src={'/placeholder.svg'}
+              src={'/result.png'}
               alt='Results'
               fill
               className='object-cover'

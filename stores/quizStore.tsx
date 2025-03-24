@@ -4,7 +4,7 @@ export type QuizStep = {
   id: number
   title: string
   description: string
-  image: string
+  image: { url: string }[]
   type: 'single' | 'multiple'
   correct_answer: string
   step: string
@@ -130,7 +130,6 @@ export const useQuizStore = create<QuizStore>((set, get) => ({
       total,
       percentage: Number(((correct / total) * 100).toFixed(0)),
     }
-    console.log('result', result)
     set({ result })
   },
 }))
